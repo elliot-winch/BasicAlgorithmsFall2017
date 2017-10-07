@@ -1,6 +1,6 @@
 package twothreetrees091217;
 
-import java.util.Scanner;
+import java.io.*;
 
 public class Main {
 	
@@ -8,20 +8,61 @@ public class Main {
 		
 		TwoThreeTree tree = new TwoThreeTree();
 		
-		Scanner in = new Scanner(System.in);
+		BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
 		
-		//Part 1: Insert				
-		int numInputs = in.nextInt();
+		int n = 0;
 		
-		for(int i = 0; i < numInputs; i++){		
-			twothree.insert(in.next(), in.nextInt(), tree);
+		try{
+			n = Integer.parseInt(in.readLine());
+		} catch (Exception e){
+			System.out.println("Bad input");
+			System.exit(1);
 		}
 		
-		//Instruction 2: Retrieve In Range
-		int numGets = in.nextInt();
-		
-		for(int i = 0; i < numGets; i++){
-			twothree.printValuesInRange(tree, in.next(), in.next());
+		for(int i = 0; i < n; i++){
+			String[] tmp = new String[0];
+			
+			try{
+				tmp = in.readLine().split(" ");
+			} catch (Exception e){
+				System.out.println("Bad input");
+				System.exit(1);
+			}
+						
+			twothree.insert(tmp[0], Integer.parseInt(tmp[1]), tree);
 		}
+		
+		int m = 0;
+		
+		try{
+			m = Integer.parseInt(in.readLine());
+		} catch (Exception e){
+			System.out.println("Bad input");
+			System.exit(1);
+		}
+		
+		for(int i = 0; i < m; i++){
+			String[] tmp = new String[0];
+			
+			try{
+				tmp = in.readLine().split(" ");
+			} catch (Exception e){
+				System.out.println("Bad input");
+				System.exit(1);
+			}
+						
+			int query = Integer.parseInt(tmp[0]);
+			
+			if(query == 1){
+				twothree.incValue(tree, tmp[1], Integer.parseInt(tmp[2]));
+			} else if (query == 2){
+				System.out.println(twothree.eval(tree, Integer.parseInt(tmp[1])));
+			} else {
+				System.out.println("Bad input");
+				System.exit(1);
+			}
+		}
+		
 	}
+	
 }
